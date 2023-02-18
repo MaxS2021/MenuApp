@@ -5,13 +5,31 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.maxencoder.toolbarapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var bind: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        bind = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(bind.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Admin"
+
+        bind.bNav.selectedItemId = R.id.send
+
+        bind.bNav.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.open -> {Toast.makeText(this, "Open", Toast.LENGTH_SHORT).show()}
+                R.id.send -> {Toast.makeText(this, "Send", Toast.LENGTH_SHORT).show()}
+                R.id.select -> {Toast.makeText(this, "Select", Toast.LENGTH_SHORT).show()}
+                R.id.receiv -> {Toast.makeText(this, "Receiv", Toast.LENGTH_SHORT).show()}
+            }
+            true
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
